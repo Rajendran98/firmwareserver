@@ -20,7 +20,7 @@ Customer.create = (newCustomer, result) => {
 };
 
 Customer.findById = (devicetypeId, result) => {
-  sql.query(`SELECT * FROM devicetype WHERE ID = ${devicetypeId}`, (err, res) => {
+  sql.query(`SELECT * FROM singledevice WHERE ID IN (${devicetypeId})`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -28,8 +28,8 @@ Customer.findById = (devicetypeId, result) => {
     }
 
     if (res.length) {
-      console.log("found customer: ", res[0]);
-      result(null, res[0]);
+      console.log("found customer: ", res);
+      result(null, res);
       return;
     }
 
